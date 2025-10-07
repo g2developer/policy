@@ -1,0 +1,42 @@
+<!-- terms.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Terms of Service</title>
+  <script>
+    const DEFAULT_LANG = 'en';
+    async function loadTerms() {
+      const params = new URL(location.href).searchParams;
+      const lang = params.get('lang') || navigator.language.split('-')[0] || DEFAULT_LANG;
+      const appName = params.get('appName') || '갑자기 리마인드';
+      const effective = params.get('effective') || '2025-10-07';
+      const url = `./terms/${lang}.html`;
+
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error();
+        const html = await res.text();
+        document.getElementById('content').innerHTML = html
+          .replaceAll('{appName}', appName)
+          .replaceAll('{effective}', effective);
+      } catch {
+        // fallback 영어
+        const res = await fetch(`./terms/${DEFAULT_LANG}.html`);
+        document.getElementById('content').innerHTML = (await res.text())
+          .replaceAll('{appName}', appName)
+          .replaceAll('{effective}', effective);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', loadTerms);
+  </script>
+</head>
+<body style="background:#0b0f1a;color:#e5e7eb;font-family:sans-serif;">
+  <main style="max-width:940px;margin:0 auto;padding:24px">
+    <div id="content" style="background:#111827;border:1px solid #1f2937;border-radius:16px;padding:28px">
+      <p>Loading terms...</p>
+    </div>
+  </main>
+</body>
+</html>

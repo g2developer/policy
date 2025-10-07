@@ -22,54 +22,54 @@
   <footer>© 2025 Sudden Reminder</footer>
 
   <script>
-    // ✅ URL 파라미터 읽기
     const params = new URLSearchParams(window.location.search);
     const langCode = (params.get("lang") || navigator.language || "en").split("-")[0];
     const appName = decodeURIComponent(params.get("appName") || "Sudden Reminder");
 
-    // ✅ 32 언어 정책 문구
     const policies = {
-      ko:{title:"개인정보 처리방침",body:"{appName}는 사용자의 개인정보를 수집하거나 외부 서버로 전송하지 않습니다.\n모든 데이터는 기기 내에만 저장되며, 광고나 추적 기능은 없습니다."},
-      en:{title:"Privacy Policy",body:"{appName} does not collect, store, or transmit any personal information.\nAll data stays locally on your device, with no ads or tracking features."},
-      ja:{title:"プライバシーポリシー",body:"{appName}はユーザーの個人情報を収集または外部サーバーに送信しません。\nすべてのデータはデバイス内にのみ保存され、広告や追跡機能はありません。"},
-      "zh-Hans":{title:"隐私政策",body:"{appName} 不会收集或传输任何个人信息。\n所有数据都保留在您的设备上，不包含广告或跟踪功能。"},
-      "zh-Hant":{title:"隱私權政策",body:"{appName} 不會收集或傳輸任何個人資料。\n所有資料僅儲存在您的裝置中，並且不含廣告或追蹤功能。"},
-      es:{title:"Política de privacidad",body:"{appName} no recopila, almacena ni transmite información personal.\nTodos los datos permanecen en su dispositivo, sin anuncios ni seguimiento."},
-      fr:{title:"Politique de confidentialité",body:"{appName} ne collecte, ne stocke ni ne transmet aucune information personnelle.\nToutes les données restent sur votre appareil, sans publicité ni suivi."},
-      de:{title:"Datenschutzerklärung",body:"{appName} sammelt, speichert oder überträgt keine personenbezogenen Daten.\nAlle Daten bleiben lokal auf Ihrem Gerät, ohne Werbung oder Tracking."},
-      ru:{title:"Политика конфиденциальности",body:"{appName} не собирает, не хранит и не передает личную информацию.\nВсе данные остаются на вашем устройстве, без рекламы и отслеживания."},
-      ar:{title:"سياسة الخصوصية",body:"{appName} لا يجمع أي معلومات شخصية ولا يخزنها أو ينقلها.\nتبقى جميع البيانات على جهازك فقط، بدون إعلانات أو تتبع."},
-      hi:{title:"गोपनीयता नीति",body:"{appName} कोई भी व्यक्तिगत जानकारी एकत्र, संग्रहीत या प्रसारित नहीं करता है।\nसारा डेटा केवल आपके डिवाइस पर रहता है, बिना विज्ञापनों या ट्रैकिंग के।"},
-      bn:{title:"গোপনীয়তা নীতি",body:"{appName} কোনও ব্যক্তিগত তথ্য সংগ্রহ, সংরক্ষণ বা প্রেরণ করে না।\nসমস্ত ডেটা শুধুমাত্র আপনার ডিভাইসে থাকে, কোনও বিজ্ঞাপন বা ট্র্যাকিং ছাড়াই।"},
-      pt:{title:"Política de privacidade",body:"{appName} não coleta, armazena nem transmite informações pessoais.\nTodos os dados permanecem no seu dispositivo, sem anúncios nem rastreamento."},
-      "pt-BR":{title:"Política de privacidade",body:"{appName} não coleta, armazena nem transmite informações pessoais.\nTodos os dados permanecem no seu dispositivo, sem anúncios nem rastreamento."},
-      tr:{title:"Gizlilik Politikası",body:"{appName} hiçbir kişisel bilgiyi toplamaz, saklamaz veya iletmez.\nTüm veriler yalnızca cihazınızda kalır, reklam veya izleme içermez."},
-      vi:{title:"Chính sách bảo mật",body:"{appName} không thu thập, lưu trữ hoặc truyền bất kỳ thông tin cá nhân nào.\nTất cả dữ liệu được lưu trên thiết bị của bạn, không có quảng cáo hoặc theo dõi."},
-      id:{title:"Kebijakan Privasi",body:"{appName} tidak mengumpulkan, menyimpan, atau mengirimkan informasi pribadi apa pun.\nSemua data tetap berada di perangkat Anda, tanpa iklan atau pelacakan."},
-      it:{title:"Informativa sulla privacy",body:"{appName} non raccoglie, memorizza o trasmette informazioni personali.\nTutti i dati rimangono sul tuo dispositivo, senza pubblicità o tracciamento."},
-      th:{title:"นโยบายความเป็นส่วนตัว",body:"{appName} ไม่เก็บ จัดเก็บ หรือส่งข้อมูลส่วนบุคคลใด ๆ\nข้อมูลทั้งหมดจะถูกเก็บไว้ในอุปกรณ์ของคุณ โดยไม่มีโฆษณาหรือการติดตาม"},
-      pl:{title:"Polityka prywatności",body:"{appName} nie gromadzi, nie przechowuje ani nie przesyła żadnych danych osobowych.\nWszystkie dane pozostają na Twoim urządzeniu, bez reklam i śledzenia."},
-      nl:{title:"Privacybeleid",body:"{appName} verzamelt, bewaart of verzendt geen persoonlijke informatie.\nAlle gegevens blijven op uw apparaat, zonder advertenties of tracking."},
-      sv:{title:"Integritetspolicy",body:"{appName} samlar inte in, lagrar eller överför någon personlig information.\nAll data stannar på din enhet, utan annonser eller spårning."},
-      he:{title:"מדיניות פרטיות",body:"{appName} אינו אוסף, שומר או מעביר מידע אישי.\nכל הנתונים נשארים במכשיר שלך בלבד, ללא פרסומות או מעקב."},
-      el:{title:"Πολιτική απορρήτου",body:"{appName} δεν συλλέγει, αποθηκεύει ή μεταδίδει προσωπικές πληροφορίες.\nΌλα τα δεδομένα παραμένουν στη συσκευή σας, χωρίς διαφημίσεις ή παρακολούθηση."},
-      cs:{title:"Zásady ochrany osobních údajů",body:"{appName} neshromažďuje, neukládá ani nepřenáší žádné osobní údaje.\nVšechna data zůstávají ve vašem zařízení, bez reklam a sledování."},
-      hu:{title:"Adatvédelmi irányelvek",body:"{appName} nem gyűjt, nem tárol és nem továbbít személyes adatokat.\nMinden adat az eszközön marad, hirdetések és nyomon követés nélkül."},
-      ro:{title:"Politica de confidențialitate",body:"{appName} nu colectează, stochează sau transmite informații personale.\nToate datele rămân pe dispozitivul tău, fără reclame sau urmărire."},
-      fi:{title:"Tietosuojakäytäntö",body:"{appName} ei kerää, tallenna tai siirrä henkilötietoja.\nKaikki tiedot pysyvät laitteellasi, ilman mainoksia tai seurantaa."},
-      uk:{title:"Політика конфіденційності",body:"{appName} не збирає, не зберігає та не передає жодної особистої інформації.\nУсі дані залишаються на вашому пристрої, без реклами чи відстеження."},
-      ta:{title:"தனியுரிமைக் கொள்கை",body:"{appName} எந்தவொரு தனிப்பட்ட தகவலையும் சேகரிக்கவோ, சேமிக்கவோ, அனுப்பவோ மாட்டாது.\nஅனைத்து தரவும் உங்கள் சாதனத்தில் மட்டுமே இருக்கும், விளம்பரங்கள் அல்லது கண்காணிப்பு இல்லாமல்."},
-      te:{title:"గోప్యతా విధానం",body:"{appName} ఏ వ్యక్తిగత సమాచారాన్ని సేకరించదు, నిల్వ చేయదు లేదా ప్రసారం చేయదు.\nఅన్ని డేటా మీ పరికరంలోనే ఉంటాయి, ప్రకటనలు లేకుండా."},
-      sw:{title:"Sera ya faragha",body:"{appName} haikusanyi, kuhifadhi au kusambaza taarifa yoyote ya kibinafsi.\nTaarifa zote hubaki kwenye kifaa chako, bila matangazo au ufuatiliaji."}
+      en:{title:"Privacy Policy",body:"{appName} does not collect, store, or transmit any personal information.\nAll data stays locally on your device, with no ads or tracking features.",dateLabel:"Effective Date"},
+      "zh-CN":{title:"隐私政策",body:"{appName} 不会收集、存储或传输任何个人信息。\n所有数据仅保留在您的设备上，不包含广告或跟踪功能。",dateLabel:"生效日期"},
+      "zh-TW":{title:"隱私權政策",body:"{appName} 不會收集、儲存或傳輸任何個人資料。\n所有資料僅保留在您的裝置中，且不含廣告或追蹤功能。",dateLabel:"生效日期"},
+      hi:{title:"गोपनीयता नीति",body:"{appName} कोई भी व्यक्तिगत जानकारी एकत्र, संग्रहीत या प्रसारित नहीं करता है।\nसारा डेटा केवल आपके डिवाइस पर रहता है, बिना विज्ञापनों या ट्रैकिंग के।",dateLabel:"प्रभावी तिथि"},
+      es:{title:"Política de privacidad",body:"{appName} no recopila, almacena ni transmite información personal.\nTodos los datos permanecen en su dispositivo, sin anuncios ni seguimiento.",dateLabel:"Fecha de vigencia"},
+      fr:{title:"Politique de confidentialité",body:"{appName} ne collecte, ne stocke ni ne transmet aucune information personnelle.\nToutes les données restent sur votre appareil, sans publicité ni suivi.",dateLabel:"Date d’effet"},
+      ar:{title:"سياسة الخصوصية",body:"{appName} لا يجمع أي معلومات شخصية ولا يخزنها أو ينقلها.\nتبقى جميع البيانات على جهازك فقط، بدون إعلانات أو تتبع.",dateLabel:"تاريخ السريان"},
+      bn:{title:"গোপনীয়তা নীতি",body:"{appName} কোনো ব্যক্তিগত তথ্য সংগ্রহ, সংরক্ষণ বা প্রেরণ করে না।\nসমস্ত ডেটা শুধুমাত্র আপনার ডিভাইসে থাকে, কোনো বিজ্ঞাপন বা ট্র্যাকিং ছাড়াই।",dateLabel:"কার্যকর তারিখ"},
+      pt:{title:"Política de privacidade",body:"{appName} não coleta, armazena nem transmite informações pessoais.\nTodos os dados permanecem no seu dispositivo, sem anúncios nem rastreamento.",dateLabel:"Data de vigência"},
+      "pt-BR":{title:"Política de privacidade",body:"{appName} não coleta, armazena nem transmite informações pessoais.\nTodos os dados permanecem no seu dispositivo, sem anúncios nem rastreamento.",dateLabel:"Data de vigência"},
+      ru:{title:"Политика конфиденциальности",body:"{appName} не собирает, не хранит и не передает личную информацию.\nВсе данные остаются на вашем устройстве, без рекламы и отслеживания.",dateLabel:"Дата вступления в силу"},
+      ur:{title:"رازداری کی پالیسی",body:"{appName} کوئی ذاتی معلومات جمع، محفوظ یا منتقل نہیں کرتا۔\nتمام ڈیٹا صرف آپ کے آلے پر رہتا ہے، بغیر کسی اشتہار یا ٹریکنگ کے۔",dateLabel:"موثر تاریخ"},
+      id:{title:"Kebijakan Privasi",body:"{appName} tidak mengumpulkan, menyimpan, atau mengirimkan informasi pribadi apa pun.\nSemua data tetap berada di perangkat Anda, tanpa iklan atau pelacakan.",dateLabel:"Tanggal Berlaku"},
+      de:{title:"Datenschutzerklärung",body:"{appName} sammelt, speichert oder überträgt keine personenbezogenen Daten.\nAlle Daten bleiben lokal auf Ihrem Gerät, ohne Werbung oder Tracking.",dateLabel:"Gültigkeitsdatum"},
+      ja:{title:"プライバシーポリシー",body:"{appName}は個人情報を収集・保存・送信しません。\nすべてのデータは端末内にのみ保存され、広告や追跡機能はありません。",dateLabel:"施行日"},
+      sw:{title:"Sera ya faragha",body:"{appName} haikusanyi, kuhifadhi au kusambaza taarifa yoyote ya kibinafsi.\nTaarifa zote hubaki kwenye kifaa chako, bila matangazo au ufuatiliaji.",dateLabel:"Tarehe ya kutumika"},
+      mr:{title:"गोपनीयता धोरण",body:"{appName} कोणतीही वैयक्तिक माहिती गोळा, साठवून किंवा प्रसारित करत नाही.\nसर्व डेटा फक्त तुमच्या डिव्हाइसवरच राहतो; जाहिराती किंवा ट्रॅकिंग नाही.",dateLabel:"अमलाची तारीख"},
+      te:{title:"గోప్యతా విధానం",body:"{appName} ఏ వ్యక్తిగత సమాచారాన్ని సేకరించదు, నిల్వ చేయదు లేదా ప్రసారం చేయదు.\nఅన్ని డేటా మీ పరికరంలోనే ఉంటాయి, ప్రకటనలు లేదా ట్రాకింగ్ లేకుండా.",dateLabel:"అమల్లోకి వచ్చే తేది"},
+      pa:{title:"ਗੋਪਨੀਯਤਾ ਨੀਤੀ",body:"{appName} ਕੋਈ ਵੀ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਇਕੱਠੀ, ਸੰਭਾਲ ਜਾਂ ਭੇਜਦਾ ਨਹੀਂ ਹੈ।\nਸਾਰਾ ਡਾਟਾ ਸਿਰਫ਼ ਤੁਹਾਡੇ ਡਿਵਾਈਸ ‘ਤੇ ਹੀ ਰਹਿੰਦਾ ਹੈ, ਬਿਨਾ ਵਿਗਿਆਪਨਾਂ ਜਾਂ ਟ੍ਰੈਕਿੰਗ ਦੇ।",dateLabel:"ਲਾਗੂ ਮਿਤੀ"},
+      tr:{title:"Gizlilik Politikası",body:"{appName} hiçbir kişisel bilgiyi toplamaz, saklamaz veya iletmez.\nTüm veriler yalnızca cihazınızda kalır; reklam veya izleme yoktur.",dateLabel:"Yürürlük Tarihi"},
+      ta:{title:"தனியுரிமைக் கொள்கை",body:"{appName} எந்தவொரு தனிப்பட்ட தகவலையும் சேகரிக்கவோ, சேமிக்கவோ, பரிமாறவோ செய்யாது.\nஅனைத்து தரவும் உங்கள் சாதனத்திலேயே இருக்கும்; விளம்பரங்கள் அல்லது கண்காணிப்பு இல்லை.",dateLabel:"செயலில் வரும் தேதி"},
+      vi:{title:"Chính sách bảo mật",body:"{appName} không thu thập, lưu trữ hoặc truyền bất kỳ thông tin cá nhân nào.\nTất cả dữ liệu được lưu trên thiết bị của bạn, không có quảng cáo hoặc theo dõi.",dateLabel:"Ngày hiệu lực"},
+      fil:{title:"Patakaran sa Privacy",body:"Hindi nangongolekta, nag-iimbak, o nagpapadala ng anumang personal na impormasyon ang {appName}.\nNananatili lamang sa iyong device ang lahat ng data, walang ads o tracking.",dateLabel:"Petsa ng bisa"},
+      ko:{title:"개인정보 처리방침",body:"{appName}는 개인정보를 수집·저장·외부 서버로 전송하지 않습니다.\n모든 데이터는 기기 내에만 보관되며, 광고나 추적 기능이 없습니다.",dateLabel:"시행일"},
+      it:{title:"Informativa sulla privacy",body:"{appName} non raccoglie, memorizza o trasmette informazioni personali.\nTutti i dati rimangono sul tuo dispositivo, senza pubblicità o tracciamento.",dateLabel:"Data di validità"},
+      ha:{title:"Manufar Sirri",body:"{appName} ba ya tattara, ajiye ko aika bayanan sirri na kai.\nDuk bayanai suna nan a na’urarka kawai, ba tare da talla ko bin diddigi ba.",dateLabel:"Ranar Fara Aiki"},
+      jv:{title:"Kabijakan Privasi",body:"{appName} ora nglumpukaké, nyimpen, utawa ngirim informasi pribadi apa wae.\nKabeh data tetep ana ing pirantimu, tanpa iklan utawa pelacakan.",dateLabel:"Tanggal Berlaku"},
+      fa:{title:"سیاست حریم خصوصی",body:"{appName} هیچ‌گونه اطلاعات شخصی را جمع‌آوری، ذخیره یا منتقل نمی‌کند.\nتمام داده‌ها فقط روی دستگاه شما می‌مانند و هیچ تبلیغ یا رهگیری‌ای وجود ندارد.",dateLabel:"تاریخ اجرا"},
+      gu:{title:"ગોપનીયતા નીતિ",body:"{appName} કોઈપણ વ્યક્તિગત માહિતી એકત્રિત, સંગ્રહિત અથવા પ્રસારિત કરતી નથી.\nબધા ડેટા ફક્ત તમારા ઉપકરણમાં જ રહે છે, જાહેરાતો અથવા ટ્રેકિંગ વગર.",dateLabel:"લાગુ તારીખ"},
+      pl:{title:"Polityka prywatności",body:"{appName} nie gromadzi, nie przechowuje ani nie przesyła żadnych danych osobowych.\nWszystkie dane pozostają na Twoim urządzeniu, bez reklam i śledzenia.",dateLabel:"Data wejścia w życie"},
+      th:{title:"นโยบายความเป็นส่วนตัว",body:"{appName} จะไม่รวบรวม จัดเก็บ หรือส่งต่อข้อมูลส่วนบุคคลใด ๆ\nข้อมูลทั้งหมดจะเก็บไว้ในอุปกรณ์ของคุณ โดยไม่มีโฆษณาหรือการติดตาม",dateLabel:"วันที่มีผลบังคับใช้"},
+      uk:{title:"Політика конфіденційності",body:"{appName} не збирає, не зберігає та не передає жодної особистої інформації.\nУсі дані залишаються на вашому пристрої, без реклами чи відстеження.",dateLabel:"Дата набрання чинності"}
     };
 
     const policy = policies[langCode] || policies["en"];
     const bodyText = policy.body.replaceAll("{appName}", appName);
+    const effectiveDate = "2025-10-07";
 
     // ✅ 렌더링
     document.getElementById("content").innerHTML = `
       <h2>${policy.title}</h2>
       <p>${bodyText}</p>
+      <p><strong>${policy.dateLabel}:</strong> ${effectiveDate}</p>
     `;
   </script>
 </body>
