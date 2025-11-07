@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta property="og:title" content="Sudden Reminder" />
+  <meta property="og:description" content="Bring back the thoughts you almost forgot." />
+  <meta property="og:image" content="https://gyu.github.io/policy/sudden-reminder/main.png" />
+  <meta property="og:url" content="https://gyu.github.io/policy/sudden-reminder/share.html" />
+  <meta property="og:type" content="website" />
+
   <title>Sudden Reminder</title>
   <style>
     body {
@@ -32,9 +38,8 @@
   </style>
   <script>
     const ua = navigator.userAgent.toLowerCase();
-    const androidUrl = "https://play.google.com/store/apps/details?id=com.suddenreminder.app";
-    const iosUrl = "https://apps.apple.com/app/id1234567890";
-    const fallbackUrl = "https://suddenreminder.app";
+    const androidUrl = "https://play.google.com/store/apps/details?id=net.codenamu.suddenly_remind";
+    const iosUrl = "https://apps.apple.com/app/6754346008";
 
     if (ua.includes("android")) location.replace(androidUrl);
     else if (ua.includes("iphone") || ua.includes("ipad")) location.replace(iosUrl);
@@ -46,8 +51,8 @@
   <p>If you’re not redirected automatically,<br>
   open the link below manually.</p>
   <p>
-    <a href="https://play.google.com/store/apps/details?id=com.suddenreminder.app">Google Play</a> |
-    <a href="https://apps.apple.com/app/id1234567890">App Store</a>
+    <a href="https://play.google.com/store/apps/details?id=net.codenamu.suddenly_remind">Google Play</a> |
+    <a href="https://apps.apple.com/app/6754346008">App Store</a>
   </p>
 </body>
 </html>
