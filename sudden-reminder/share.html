@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sudden Reminder</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      background: #fafafa;
+    }
+    img {
+      width: 40%;
+      max-width: 240px;
+      height: auto;
+      margin-bottom: 1.2rem;
+    }
+    h2 { font-size: 1.4rem; margin: 0.5rem 0; color: #222; }
+    p { color: #555; font-size: 1rem; line-height: 1.5; }
+    @media (max-width: 768px) {
+      img { width: 50%; }
+      h2 { font-size: 1.2rem; }
+      p { font-size: 0.95rem; }
+    }
+  </style>
+  <script>
+    const ua = navigator.userAgent.toLowerCase();
+    const androidUrl = "https://play.google.com/store/apps/details?id=com.suddenreminder.app";
+    const iosUrl = "https://apps.apple.com/app/id1234567890";
+    const fallbackUrl = "https://suddenreminder.app";
+
+    if (ua.includes("android")) location.replace(androidUrl);
+    else if (ua.includes("iphone") || ua.includes("ipad")) location.replace(iosUrl);
+  </script>
+</head>
+<body>
+  <img src="main.png" alt="Sudden Reminder Logo" />
+  <h2>Redirecting to the app store...</h2>
+  <p>If you’re not redirected automatically,<br>
+  open the link below manually.</p>
+  <p>
+    <a href="https://play.google.com/store/apps/details?id=com.suddenreminder.app">Google Play</a> |
+    <a href="https://apps.apple.com/app/id1234567890">App Store</a>
+  </p>
+</body>
+</html>
